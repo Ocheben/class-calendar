@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { StyledInput } from '../styledComponents';
 
-export const styles = theme => ({
+export const styles = () => ({
   label: {
     fontSize: '14px',
     transform: 'translate(14px, 12px)',

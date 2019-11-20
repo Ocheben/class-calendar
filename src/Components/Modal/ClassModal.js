@@ -51,7 +51,7 @@ const ClassModal = (props) => {
           />
         </Content>
         <Content width="80%" vmargin="1em" borderBox>
-          <Input variant="outlined" label="Course Description" name="description" multiline rowsMax="4" onChange={({ target }) => handleChange(target)}/>
+          <Input variant="outlined" label="Course Description" name="description" multiline rowsMax="4" onChange={({ target }) => handleChange(target)} />
         </Content>
         <Content width="80%" flex horizontal align="center" justify="flex-start" borderBox>
           <SText color="#394e5d" size="18px">Content</SText>

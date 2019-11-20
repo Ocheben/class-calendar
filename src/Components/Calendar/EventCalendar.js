@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import * as dateFns from 'date-fns';
-import apiCall from '../../_services/requests';
-import { storeReminders } from '../../_store/actions';
 import EventCells from '../Cells/EventCells';
 import Header from '../Header/Header';
 import Days from '../Days/Days';
-import Modal from '../Modal/Modal';
 import FullScreenDialog from '../ClassDialog/ClassDialog';
 
 const Calendar = (props) => {
-  const { reminders, dispatch } = props;
+  const { reminders } = props;
   const [state, setState] = useState({
     currentMonth: new Date(),
     selectedDate: new Date(),
@@ -22,23 +19,6 @@ const Calendar = (props) => {
     },
     isEdit: false
   });
-
-  const refreshReminders = async () => {
-    const response = await apiCall('GET', 'http://localhost:3001/reminders');
-    if (response.constructor === Array) {
-      dispatch(storeReminders(response));
-    }
-  };
-
-  useEffect(() => {
-    const getReminders = async () => {
-      const response = await apiCall('GET', 'http://localhost:3001/reminders');
-      if (response.constructor === Array) {
-        dispatch(storeReminders(response));
-      }
-    };
-    getReminders();
-  }, [dispatch]);
 
   const nextMonth = () => {
     setState({
@@ -63,45 +43,6 @@ const Calendar = (props) => {
     });
   };
 
-  const handleDateChange = (date) => {
-    setState({
-      ...state,
-      formInputs: {
-        ...state.formInputs,
-        time: date
-      }
-    });
-  };
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-    setState({
-      ...state,
-      formInputs: {
-        ...state.formInputs,
-        [name]: value
-      }
-    });
-  };
-
-  const handleSubmit = async () => {
-    await apiCall('POST', 'http://localhost:3001/events', state.formInputs);
-    refreshReminders();
-    openModal(false, {}, false);
-  };
-
-  const handleEdit = async () => {
-    await apiCall('PUT', `http://localhost:3001/events/${state.formInputs.id}`, state.formInputs);
-    refreshReminders();
-    openModal(false, {}, false);
-  };
-
-  const handleDelete = async () => {
-    await apiCall('DELETE', `http://localhost:3001/events/${state.formInputs.id}`);
-    refreshReminders();
-    openModal(false, {}, false);
-  };
-
-  const { formInputs } = state;
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <div className="root">
@@ -120,21 +61,6 @@ const Calendar = (props) => {
             openModal={openModal}
           />
         </div>
-        {
-        // state.modalOpen
-        // && (
-        // <Modal
-        //   formInputs={formInputs}
-        //   isEdit={state.isEdit}
-        //   openModal={openModal}
-        //   handleChange={handleChange}
-        //   handleDateChange={handleDateChange}
-        //   handleSubmit={handleSubmit}
-        //   handleEdit={handleEdit}
-        //   handleDelete={handleDelete}
-        // />
-        // )
-      }
         <FullScreenDialog isOpen={state.modalOpen} openModal={openModal} />
       </div>
     </MuiPickersUtilsProvider>

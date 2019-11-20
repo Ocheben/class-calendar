@@ -1,37 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-  Button, Dialog, ListItemText, ListItem, List, Divider, AppBar, Toolbar, IconButton, Slide,
-  Typography
-} from '@material-ui/core';
+import { Dialog, IconButton, Slide } from '@material-ui/core';
 // import CloseIcon from '@material-ui/icons/CloseIcon';
 import { Content, SText, StyledButton } from '../styledComponents';
-import coursebg from '../../assets/img/coursebg.jpg';
-
-const useStyles = makeStyles(theme => ({
-  appBar: {
-    position: 'relative',
-  },
-  title: {
-    marginLeft: theme.spacing(2),
-    flex: 1,
-  },
-}));
 
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 const FullScreenDialog = ({ isOpen, openModal }) => {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
     openModal(false);
   };
-
   return (
     <div>
       <Dialog fullScreen open={isOpen} onClose={handleClose} TransitionComponent={Transition}>
@@ -58,9 +35,11 @@ const FullScreenDialog = ({ isOpen, openModal }) => {
             <Content id="intro" vmargin="2em" align="center" flex justfy="center">
               <SText color="#394e5d" width="60%" weight="600" size="36px">What you will learn</SText>
               <SText color="#394e5d" width="60%" size="20px">
-                Learn essential skills to improve your English reading and writing skills and boost your chances of getting hired
-                Learn essential skills to improve your English reading and writing skills and boost your chances of getting hired
-                Learn essential skills to improve your English reading and writing skills and boost your chances of getting hired
+                Learn essential skills to improve your English reading and writing skills and boost
+                your chances of getting hired. Learn essential skills to improve your English
+                reading and writing skills and boost your chances of getting hired
+                Learn essential skills to improve your English reading and writing
+                skills and boost your chances of getting hired
               </SText>
             </Content>
             <Content id="content" vmargin="2em" align="center" flex justfy="center">

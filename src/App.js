@@ -1,9 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { white, blue, grey } from '@material-ui/core/colors';
+import { blue, grey } from '@material-ui/core/colors';
 import './App.scss';
-import ClassCalendar from './Components/Calendar/ClassCalendar';
+import ClassCalendar from './Components/Calendar/Calendar';
 import EventCalendar from './Components/Calendar/EventCalendar';
 
 const theme = createMuiTheme({
