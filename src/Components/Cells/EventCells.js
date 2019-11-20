@@ -36,7 +36,7 @@ const Cells = (props) => {
           {reminders.map((item) => {
             if (dateFns.isSameDay(new Date(item.time), cloneDay)) {
               return (
-                <div className="reminder" onClick={() => openModal(true, item, true)} style={{ background: item.tag }} key={item.time}><span>{item.title}</span></div>
+                <div className="event-cell" onClick={() => openModal(true, item, true)} style={{ background: item.tag }} key={item.time}><span>{item.title}</span></div>
               );
             }
             return null;

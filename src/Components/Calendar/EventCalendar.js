@@ -5,10 +5,11 @@ import DateFnsUtils from '@date-io/date-fns';
 import * as dateFns from 'date-fns';
 import apiCall from '../../_services/requests';
 import { storeReminders } from '../../_store/actions';
-import Cells from '../Cells/Cells';
+import EventCells from '../Cells/EventCells';
 import Header from '../Header/Header';
 import Days from '../Days/Days';
 import Modal from '../Modal/Modal';
+import FullScreenDialog from '../ClassDialog/ClassDialog';
 
 const Calendar = (props) => {
   const { reminders, dispatch } = props;
@@ -83,19 +84,19 @@ const Calendar = (props) => {
   };
 
   const handleSubmit = async () => {
-    await apiCall('POST', 'http://localhost:3001/reminders', state.formInputs);
+    await apiCall('POST', 'http://localhost:3001/events', state.formInputs);
     refreshReminders();
     openModal(false, {}, false);
   };
 
   const handleEdit = async () => {
-    await apiCall('PUT', `http://localhost:3001/reminders/${state.formInputs.id}`, state.formInputs);
+    await apiCall('PUT', `http://localhost:3001/events/${state.formInputs.id}`, state.formInputs);
     refreshReminders();
     openModal(false, {}, false);
   };
 
   const handleDelete = async () => {
-    await apiCall('DELETE', `http://localhost:3001/reminders/${state.formInputs.id}`);
+    await apiCall('DELETE', `http://localhost:3001/events/${state.formInputs.id}`);
     refreshReminders();
     openModal(false, {}, false);
   };
@@ -112,7 +113,7 @@ const Calendar = (props) => {
             currentMonth={state.currentMonth}
           />
           <Days currentMonth={state.currentMonth} />
-          <Cells
+          <EventCells
             currentMonth={state.currentMonth}
             selectedDate={state.selectedDate}
             reminders={reminders}
@@ -120,21 +121,21 @@ const Calendar = (props) => {
           />
         </div>
         {
-        state.modalOpen
-        && (
-        <Modal
-          formInputs={formInputs}
-          isEdit={state.isEdit}
-          openModal={openModal}
-          handleChange={handleChange}
-          handleDateChange={handleDateChange}
-          handleSubmit={handleSubmit}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
-        />
-        )
+        // state.modalOpen
+        // && (
+        // <Modal
+        //   formInputs={formInputs}
+        //   isEdit={state.isEdit}
+        //   openModal={openModal}
+        //   handleChange={handleChange}
+        //   handleDateChange={handleDateChange}
+        //   handleSubmit={handleSubmit}
+        //   handleEdit={handleEdit}
+        //   handleDelete={handleDelete}
+        // />
+        // )
       }
-
+        <FullScreenDialog isOpen={state.modalOpen} openModal={openModal} />
       </div>
     </MuiPickersUtilsProvider>
   );
