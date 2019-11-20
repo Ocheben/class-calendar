@@ -10,7 +10,8 @@
     "dev": "webpack-dev-server --mode development --hot",
     "lint": "esw src --color",
     "lint:watch": "npm run lint -- --watch",
-    "start-mockapi": "json-server --watch src/db.json --port 3001"
+    "start-mockapi": "json-server --watch src/db.json --port 3001",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
